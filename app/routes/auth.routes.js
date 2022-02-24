@@ -20,6 +20,7 @@ module.exports = function(app) {
     validationMiddleware.signup
   ],controller.signup);
 
+  app.post("/api/login",controller.signin);
   /*app.post("/api/auth/signin", controller.signin);
   app.post("/api/auth/addParts", controller.addParts);
   app.post("/api/auth/updateparts", controller.updateparts);
