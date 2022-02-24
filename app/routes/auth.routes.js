@@ -13,12 +13,7 @@ module.exports = function(app) {
     next();
   });
 
-  app.post("/api/registration2",verifySignUp.checkDuplicateEmail,controller.signup);
-
-  app.post('/api/registration', multipartMiddleware, (req, res) => {
-      console.log(req.body);
-  });
-
+  app.post("/api/login",controller.signin);
   /*app.post("/api/auth/signin", controller.signin);
   app.post("/api/auth/addParts", controller.addParts);
   app.post("/api/auth/updateparts", controller.updateparts);
