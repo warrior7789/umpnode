@@ -2,6 +2,7 @@ const { verifySignUp } = require("../middleware");
 const controller = require("../controllers/auth.controller");
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
+const validationMiddleware = require('../middleware/validation-middleware');
 //const SpinnControlers = require("../controllers/spinn.controller");
 
 module.exports = function(app) {
@@ -13,11 +14,11 @@ module.exports = function(app) {
     next();
   });
 
-  app.post("/api/registration2",verifySignUp.checkDuplicateEmail,controller.signup);
-
-  app.post('/api/registration', multipartMiddleware, (req, res) => {
-      console.log(req.body);
-  });
+  app.post("/api/registration",[
+    multipartMiddleware,
+    verifySignUp.checkDuplicateEmail,
+    validationMiddleware.signup
+  ],controller.signup);
 
   /*app.post("/api/auth/signin", controller.signin);
   app.post("/api/auth/addParts", controller.addParts);

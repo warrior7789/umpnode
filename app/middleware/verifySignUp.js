@@ -3,8 +3,8 @@ const ROLES = db.ROLES;
 const User = db.user;
 
 checkDuplicateEmail = (req,res,next) =>{
-    console.log(req.body);
-    return;
+    //console.log(req.body);
+    //return;
     User.findOne({
         where:{
             email: req.body.email
@@ -15,6 +15,8 @@ checkDuplicateEmail = (req,res,next) =>{
                 message : "Eamil is already Exist"
             });
             return;
+        }else {
+            next();
         }
     })
 }
