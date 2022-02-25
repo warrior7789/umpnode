@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(50)
         },
         password: {
-            type: Sequelize.STRING(50)
+            type: Sequelize.STRING(255)
         },        
         email_verified_at: {
             type: Sequelize.DATE,

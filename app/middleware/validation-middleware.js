@@ -8,8 +8,7 @@ const signup = (req, res, next) => {
         'birthdate'   :'required|date',
         'province_id' :'required|integer',
         'town_id'     :'required|integer',
-        'password'    :'required',          
-        'avatar'      :'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'password'    :'required',
     }
     validator(req.body, validationRule, {}, (err, status) => {
         if (!status) {
