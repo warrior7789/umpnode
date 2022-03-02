@@ -1,6 +1,31 @@
-Lr
-this is from register
-this is from login
+public function getcurl(){
 
+        $data = array();
+        $data[] = $this->check('ICPUSDT',56.11,15);
+        $data[] = $this->check('MATICUSDT',1.41870,100);
+        $data[] = $this->check('DENTUSDT',0.004893,50000);
+        $data[] = $this->check('BTCUSDT',0,0);
+        $data[] = $this->check('AAVEUSDT',356,1);
+        $data[] = $this->check('TRXUSDT',0.11520,6000);
+        $total_g=0;
+        foreach ($data as $key => $d) {
+           $total_g =$total_g + $d['gain'];
+        }
 
-this is from Register one
+        $data['total_g']=$total_g;
+       // json_encode(value)
+        Storage::disk('local')->put('example.txt', json_encode($this->check('BTCUSDT',0,0)) );
+        return response()->json($data);
+    }
+public function check($s,$bp,$q){
+        $response = Http::get('https://api.binance.com/api/v3/ticker/price?symbol='.$s);
+        $jsonData = $response->json();
+
+        $now = $jsonData['price'];
+        $gain = ($now - $bp) * $q;
+        $data = array();
+        $data['sy'] =$s;
+        $data['now'] =$now;
+        $data['gain'] =round($gain,2);
+        return $data;
+    }

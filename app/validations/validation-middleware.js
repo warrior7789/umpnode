@@ -70,7 +70,6 @@ const image_upload = (req, res, next) => {
     // so we can inject our controller manually as the next()
 
     if (!req.file) { 
-        console.log(req.file)
         //return res.json({ error: ErrorMessages.invalidFiletype })
         res.status(412)
             .send({
