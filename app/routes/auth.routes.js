@@ -54,7 +54,7 @@ module.exports = function(app) {
     upload,
   ],controller.signup);*/
 
-  app.post('/api/registration',[verifySignUp.checkDuplicateEmail,validationMiddleware.signup],controller.signup);
+  app.post('/api/registration',[multipartMiddleware,verifySignUp.checkDuplicateEmail,validationMiddleware.signup,validationMiddleware.image_upload],controller.signup);
 
 /*  app.post("/api/registration", (req, res) => {
      upload(req, res, (err) => {
