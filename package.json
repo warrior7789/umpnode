@@ -1,35 +1,25 @@
 {
-  "name": "node-js-jwt-auth",
+  "name": "node-basic",
   "version": "1.0.0",
-  "description": "Node.js Demo for JWT Authentication",
+  "description": "node basic",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
-  "keywords": [
-    "node.js",
-    "jwt",
-    "authentication",
-    "express",
-    "mysql"
-  ],
-  "author": "bezkoder",
+  "author": "mahesh chomal",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
-    "jw-paginate": "^1.0.4",
     "multer": "^1.4.4",
-    "mysql2": "^2.1.0",
-    "node-fetch": "^2.6.0",
-    "nodemailer": "^6.4.3",
-    "nodemon": "^2.0.2",
-    "sequelize": "^5.21.3",
-    "validatorjs": "^3.22.1"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

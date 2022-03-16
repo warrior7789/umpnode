@@ -1,0 +1,29 @@
+
+https://www.bezkoder.com/node-js-jwt-authentication-mysql/
+
+
+
+$ mkdir node-js-jwt-auth
+$ cd node-js-jwt-auth
+
+npm init
+name: (node-js-jwt-auth) 
+version: (1.0.0) 
+description: Node.js Demo for JWT Authentication
+entry point: (index.js) server.js
+test command: 
+git repository: 
+keywords: node.js, express, jwt, authentication, mysql
+author: bezkoder
+license: (ISC)
+Is this ok? (yes) yes
+
+
+npm install nodemon --save-dev
+"start":"nodemon server.js"
+
+
+
+
+usefull link for sql 
+https://www.bezkoder.com/sequelize-associate-one-to-many/
