@@ -25,5 +25,11 @@ npm install nodemon --save-dev
 
 
 
+
+
+
 usefull link for sql 
 https://www.bezkoder.com/sequelize-associate-one-to-many/
+
+
+npm install connect-multiparty
