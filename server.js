@@ -18,7 +18,7 @@ const Role = db.role;
   initial();
 });*/
 
-db.sequelize.sync();
+//db.sequelize.sync();
 
 
 app.get("/", (req, res) => {
