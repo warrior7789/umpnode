@@ -5,44 +5,66 @@ const Role = db.role;
 const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+var fs = require('fs');
+const helper = require('../helper/helper');
+var target_path = './public/avatar/';
+const responce = require('../lib/responce');
+
 exports.signup = (req, res) => {
     console.log(req.body, req.files);
+    var unix = Math.round(+new Date()/1000);
+    console.log(unix);
+    
+    if(helper.isEmpty(req.files)){
+        res.status(200).send({
+            message: 'Avatar required.'
+        });
+    }
+    var tmp_path = req.files.avatar.path;
+    var type = req.files.avatar.type;
+    var name = unix+req.files.avatar.name;
+    target_path = target_path + name;
+    
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            //res.send('File uploaded to: ' + target_path);
+        });
+    });
     // Save User to Database
     User.create({
-            username: req.body.username,
-            email: req.body.email,
-            avatar: req.files.avatar.path,
-            password: bcrypt.hashSync(req.body.password, 8)
-        })
-        .then(user => {
-            if (req.body.roles) {
-                Role.findAll({
-                    where: {
-                        name: {
-                            [Op.or]: req.body.roles
-                        }
+        username: req.body.username,
+        email: req.body.email,
+        avatar: name,
+        password: bcrypt.hashSync(req.body.password, 8)
+    })
+    .then(user => {
+        if (!helper.isEmpty(req.body.roles)) {
+            Role.findAll({
+                where: {
+                    name: {
+                        [Op.or]: req.body.roles
                     }
-                }).then(roles => {
-                    user.setRoles(roles).then(() => {
-                        res.send({
-                            message: "User was registered successfully!"
-                        });
-                    });
+                }
+            }).then(roles => {
+                user.setRoles(roles).then(() => {
+                    responce.sendResponse(res,{},"User was registered successfully!")
                 });
-            } else {
-                // user role = 1
-                user.setRoles([1]).then(() => {
-                    res.send({
-                        message: "User was registered successfully!"
-                    });
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message
             });
+        } else {
+            // user role = 1
+            user.setRoles([1]).then(() => {
+                responce.sendResponse(res,{},"User was registered successfully!")                    
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message,
+            status:0
         });
+    });
 };
 exports.signin = (req, res) => {
     User.findOne({
@@ -53,7 +75,8 @@ exports.signin = (req, res) => {
         .then(user => {
             if (!user) {
                 return res.status(404).send({
-                    message: "User Not found."
+                    message: "User Not found.",
+                    staus:0
                 });
             }
             var passwordIsValid = bcrypt.compareSync(

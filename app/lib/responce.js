@@ -19,7 +19,7 @@ module.exports = {
     	data.status = code;
     	data.message = message;
     	data.data = result;
-    	data.success = false;
+    	data.success = true;
 
     	if(!helper.isEmpty(token)){
     		data.token = token;

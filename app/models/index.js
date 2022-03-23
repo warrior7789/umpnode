@@ -5,6 +5,7 @@ const sequelize = new Sequelize(
   config.USER,
   config.PASSWORD,
   {
+    logging: false,
     host: config.HOST,
     dialect: config.dialect,
     operatorsAliases: false,

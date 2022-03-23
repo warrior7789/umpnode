@@ -4,10 +4,6 @@ const {
 const controller = require("../controllers/auth.controller");
 var multipart = require('connect-multiparty');
 //const DIR = './imagesPath/';
-const DIR = './public/avatar/';
-
-var multipartMiddleware = multipart({ uploadDir: DIR });
-
 module.exports = function(app) {
     app.use(function(req, res, next) {
         res.header(
@@ -18,8 +14,7 @@ module.exports = function(app) {
     });
     app.post(
         "/api/auth/signup",
-        [    
-            multipartMiddleware,
+        [                
             verifySignUp.checkDuplicateUsernameOrEmail,
             verifySignUp.checkRolesExisted
         ],
