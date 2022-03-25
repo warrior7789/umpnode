@@ -7,6 +7,9 @@ const app = express();
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+
+
+
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 //app.use(express.json());
@@ -21,10 +24,11 @@ app.use( multipart() );
 
 const db = require("./app/models");
 const Role = db.role;
-/*db.sequelize.sync({force: true}).then(() => {
+
+db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
   initial();
-});*/
+});
 
 //db.sequelize.sync();
 
@@ -33,6 +37,19 @@ app.post("/body", function (req, res) {
     console.log(req.files)
     res.status(200).send({
       'message' : "heelo "
+    });
+});
+
+
+app.post("/check", function (req, res) {    
+    var user_name = "";
+    if(req.body.status == 1){
+        user_name = "mahesh";
+        console.log(req.body)
+    }
+    res.status(200).send({
+      'user_name' : user_name,
+        'status' : req.body.status
     });
 });
 
