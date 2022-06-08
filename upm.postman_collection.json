@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "2e7d7be6-e9cb-4bb4-9583-acf5feca5ea9",
+		"name": "upm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Befor Auth",
+					"item": [
+						{
+							"name": "send-otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mobile",
+											"value": "8866337764",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{site_url}}users/send-otp",
+									"host": [
+										"{{site_url}}users"
+									],
+									"path": [
+										"send-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login-with-otp",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "mobile",
+											"value": "8866337764",
+											"type": "text"
+										},
+										{
+											"key": "otp",
+											"value": "1111",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{site_url}}users/login-with-otp",
+									"host": [
+										"{{site_url}}users"
+									],
+									"path": [
+										"login-with-otp"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "After Auth",
+					"item": [
+						{
+							"name": "set-language",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{site_url}}users/set-language",
+									"host": [
+										"{{site_url}}users"
+									],
+									"path": [
+										"set-language"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "get-languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}get-languages",
+							"host": [
+								"{{site_url}}get-languages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
